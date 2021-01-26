@@ -13,7 +13,12 @@ namespace Runner {
         private LogEntry _lastEntry;
         private int _cursorTop;
         private Stopwatch Timer { get; set; }
-        private readonly string[] _text = {"Active threads: *   ", "Simulations done: *   ", "Progress: *%   ", "Time remaining: *   "};
+        private readonly string[] _text = {
+            "Active threads: *   ",
+            "Simulations done: *   ",
+            "Progress: *%   ",
+            "Time remaining: *   "
+        };
         private static void Main() {
             new Program().InstancedMain();
         }
@@ -31,7 +36,10 @@ namespace Runner {
             ShowInfo();
             Console.WriteLine();
             Console.WriteLine("Total time: " + Timer.Elapsed.TotalSeconds.ToString("F") + "s   ");
-            Console.WriteLine("Total CPU time: " + Runner.GetResults().Sum(x=>(double)x.TotalMilliseconds / 1000).ToString("F") + "s   ");
+            Console.WriteLine("Total CPU time: "
+                              + Runner.GetResults()
+                                      .Sum(x=>(double)x.TotalMilliseconds / 1000)
+                                      .ToString("F") + "s   ");
             Console.ReadLine();
         }
 
@@ -68,7 +76,7 @@ namespace Runner {
             var values = GetInfo();
                 
             Console.SetCursorPosition(0, _cursorTop);
-                
+
             for (var i = 0; i < _text.Length; i++) {
                 Console.WriteLine(_text[i].Replace("*", values[i]));
             }
